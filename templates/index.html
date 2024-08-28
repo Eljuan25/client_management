@@ -27,14 +27,16 @@
         </tr>
         {% for client in clients %}
         <tr class="{% if client[4] >= client[3] %}active{% else %}expired{% endif %}">
-            <td>{{ client[1] }}</td>
-            <td>{{ client[2] }}</td>
-            <td>{{ client[3] }}</td>
-            <td>{{ 'Activo' if client[4] >= client[3] else 'Expirado' }}</td>
+            <td data-label="Nombre">{{ client[1] }}</td>
+            <td data-label="Email">{{ client[2] }}</td>
+            <td data-label="Fecha de Registro">{{ client[3] }}</td>
+            <td data-label="Estado">{{ 'Activo' if client[4] >= client[3] else 'Expirado' }}</td>
+            <td data-label="Acciones">
+                <a href="{{ url_for('edit', client_id=client[0]) }}">Editar</a>
+                <a href="{{ url_for('delete', client_id=client[0]) }}" onclick="return confirm('¿Estás seguro de que deseas eliminar este cliente?');">Eliminar</a>
+            </td>
         </tr>
         {% endfor %}
     </table>
-
-
 </body>
 </html>

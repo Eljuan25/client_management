@@ -38,6 +38,27 @@ def add_client(name, email, registration_date, expiration_date):
     conn.commit()
     conn.close()
 
+
+#Editar un Cliente
+
+def update_client(client_id,name,email):
+    conn = sqlite3.connect('clients.db')
+    cursor = conn.cursor()
+    cursor.execute('UPDATE clients SET name = ?, email = ? WHERE id = ?', 
+                   (name, email, client_id))
+    conn.commit()
+    conn.close()
+
+def delete_client(client_id):
+    conn = sqlite3.connect('clients.db')
+    cursor = conn.cursor()
+    cursor.execute('DELETE FROM clients WHERE id = ?', (client_id,))
+    conn.commit()
+    conn.close()
+
+
+
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
@@ -50,6 +71,24 @@ def index():
     
     clients = get_clients()
     return render_template('index.html', clients=clients)
+
+
+@app.route('/edit/<int:client_id>', methods=['GET', 'POST'])
+def edit(client_id):
+    if request.method == 'POST':
+        name = request.form['name']
+        email = request.form['email']
+        update_client(client_id, name, email)
+        return redirect(url_for('index'))
+    
+    client = [c for c in get_clients() if c[0] == client_id][0]
+    return render_template('edit.html', client=client)
+
+@app.route('/delete/<int:client_id>')
+def delete(client_id):
+    delete_client(client_id)
+    return redirect(url_for('index'))
+
 
 if __name__ == '__main__':
     init_db()
