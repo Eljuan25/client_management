@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clientes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1> Gestion de Clientes</h1>    
+
+    <form method="POST">
+        <lable for="name"> Nombre:</lable>
+        <input type="text" id="name" name="name" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <button type="submit"> Register Cliente</button>
+    </form>
+
+    <h2>Clientes Registrados</h2>
+    <table>
+        <tr>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Fecha de Registro</th>
+            <th>Estado</th>
+        </tr>
+        {% for client in clients %}
+        <tr class="{% if client[4] >= client[3] %}active{% else %}expired{% endif %}">
+            <td>{{ client[1] }}</td>
+            <td>{{ client[2] }}</td>
+            <td>{{ client[3] }}</td>
+            <td>{{ 'Activo' if client[4] >= client[3] else 'Expirado' }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+
+</body>
+</html>
