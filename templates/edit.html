@@ -2,7 +2,6 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Cliente</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
@@ -12,11 +11,16 @@
     <form method="POST">
         <label for="name">Nombre:</label>
         <input type="text" id="name" name="name" value="{{ client[1] }}" required>
+        
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" value="{{ client[2] }}" required>
-        <button type="submit">Guardar Cambios</button>
+        
+        <label for="duracion">Duración (días):</label>
+        <input type="number" id="duracion" name="duracion" value="{{ client[5] }}" min="1" required>
+        
+        <button type="submit">Actualizar Cliente</button>
     </form>
     
-    <a href="{{ url_for('index') }}">Volver</a>
+    <a href="{{ url_for('index') }}">Regresar a la lista</a>
 </body>
 </html>

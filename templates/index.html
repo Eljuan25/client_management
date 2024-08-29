@@ -3,40 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clientes</title>
+    <title>Gestión de Clientes</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h1> Gestion de Clientes</h1>    
 
-    <form method="POST">
-        <lable for="name"> Nombre:</lable>
-        <input type="text" id="name" name="name" required>
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-        <button type="submit"> Register Cliente</button>
-    </form>
+    
 
-    <h2>Clientes Registrados</h2>
-    <table>
-        <tr>
-            <th>Nombre</th>
-            <th>Email</th>
-            <th>Fecha de Registro</th>
-            <th>Estado</th>
-        </tr>
-        {% for client in clients %}
-        <tr class="{% if client[4] >= client[3] %}active{% else %}expired{% endif %}">
-            <td data-label="Nombre">{{ client[1] }}</td>
-            <td data-label="Email">{{ client[2] }}</td>
-            <td data-label="Fecha de Registro">{{ client[3] }}</td>
-            <td data-label="Estado">{{ 'Activo' if client[4] >= client[3] else 'Expirado' }}</td>
-            <td data-label="Acciones">
-                <a href="{{ url_for('edit', client_id=client[0]) }}">Editar</a>
-                <a href="{{ url_for('delete', client_id=client[0]) }}" onclick="return confirm('¿Estás seguro de que deseas eliminar este cliente?');">Eliminar</a>
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
+    <div class="container">
+        <h1>Clientes</h1>
+        <br>
+        <h1>Gestion de clientes.</h1>
+        <br />
+        <form method="POST">
+            <label for="name">Nombre:</label>
+            <input type="text" id="name" name="name" required>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="duracion">Duración (días):</label>
+            <input type="number" id="duracion" name="duracion" value="30" min="1" required>
+            
+            <button type="submit">Agregar Cliente</button>
+        </form>
+        
+        <h2>Buscar Clientes</h2>
+        <form method="GET">
+            <input type="text" name="search" placeholder="Buscar por nombre">
+            <button type="submit">Buscar</button>
+        </form>
+        
+        <h2>Lista de Clientes</h2>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                        <th>Fecha de Registro</th>
+                        <th>Fecha de Expiración</th>
+                        <th>Duración (días)</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for client in clients %}
+                        <tr>
+                            <td>{{ client[1] }}</td>
+                            <td>{{ client[2] }}</td>
+                            <td>{{ client[3] }}</td>
+                            <td>{{ client[4] }}</td>
+                            <td>{{ client[5] }}</td>
+                            <td class="actions">
+                                <a href="{{ url_for('edit', client_id=client[0]) }}" class="edit-btn">Editar</a>
+                                <a href="{{ url_for('delete', client_id=client[0]) }}" class="delete-btn">Eliminar</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
 </body>
 </html>
