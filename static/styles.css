@@ -7,6 +7,7 @@ body {
     align-items: center;
     height: 100vh;
     background-color: #f4f4f4;
+    
 }
 
 .container {
@@ -17,6 +18,7 @@ body {
 
 h1, h2 {
     color: #333;
+    text-align: center;
 }
 
 /* Estilos para formularios */
@@ -111,6 +113,66 @@ table a {
 .delete-btn:hover {
     background-color: #e53935; /* Color de fondo al pasar el cursor sobre 'Eliminar' */
 }
+
+
+/* Estilo para el contenedor de las acciones */
+.actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px; /* Espacio entre los botones */
+}
+
+/* Estilo para los botones */
+.actions a {
+    padding: 8px 12px;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.edit-btn {
+    background-color: #4CAF50; /* Color de fondo para 'Editar' */
+}
+
+.edit-btn:hover {
+    background-color: #45a049; /* Color de fondo al pasar el cursor sobre 'Editar' */
+}
+
+.delete-btn {
+    background-color: #f44336; /* Color de fondo para 'Eliminar' */
+}
+
+.delete-btn:hover {
+    background-color: #e53935; /* Color de fondo al pasar el cursor sobre 'Eliminar' */
+}
+
+.responsive-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 50px; /* Opcional: añade bordes redondeados */
+    margin-bottom: 50px; /* Espacio entre la imagen y el título */
+}
+
+/* Estilo para el título en dispositivos móviles */
+h1 {
+    font-size: 2.5em;
+    color: #333;
+    margin: 10px 0;
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2em; /* Reduce el tamaño del título en pantallas más pequeñas */
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.5em; /* Ajusta el título en pantallas muy pequeñas */
+    }
+}
+
 
 /* Estilos responsivos */
 @media (max-width: 768px) {
